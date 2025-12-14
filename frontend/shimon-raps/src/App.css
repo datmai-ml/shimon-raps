@@ -1,0 +1,450 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.debug-banner {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Rap Raps UI styles */
+.rap-container {
+  padding: 20px;
+  font-family: sans-serif;
+  color: #222;
+}
+.rap-title {
+  margin: 0 0 12px 0;
+}
+.beat-row {
+  margin-top: 8px;
+}
+/* Two-column top panels for beats (left) and emotions (right) */
+.top-panels {
+  display: flex;
+  gap: 16px;
+  align-items: stretch; /* equal height */
+  margin-top: 8px;
+}
+.panel {
+  flex: 1 1 0;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+}
+.left-panel .beats-picker { margin-top: 0; flex: 1; display: flex; flex-direction: column; }
+.right-panel .tones-row { margin-top: 0; width: 100%; flex: 1; }
+.right-panel .mixers-row { margin-top: 0; width: 100%; flex: 1; }
+/* Beats picker */
+.beats-picker { margin-top: 8px; }
+.beats-title { font-weight: 700; margin-bottom: 6px; }
+.beats-list { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.beat-card {
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 8px;
+  padding: 8px 10px;
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+}
+.beat-card.selected { border-color: #0b5ed7; box-shadow: 0 0 0 2px rgba(11,94,215,0.15); }
+.beat-header { display: flex; align-items: center; gap: 8px; }
+.beat-name { font-weight: 600; }
+.beat-profile { color: #555; font-size: 12px; margin: 4px 0 6px; }
+.beat-preview { width: 100%; }
+/* Player row: play button + waveform */
+.player-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.hidden-audio {
+  display: none;
+}
+.play-btn {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+}
+.play-btn:hover {
+  opacity: 0.9;
+}
+.waveform-canvas {
+  margin-top: 8px;
+  overflow-x: auto;
+  width: 100%;
+}
+.wave-canvas {
+  display: block;
+  height: 100px;
+  background: #fff; /* fallback while drawing */
+}
+.tones-row {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.mixers-row {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  width: 100%;
+}
+.mixer-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 0;
+  height: 100%;
+}
+.mixer-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.tones-sidebar {
+  align-self: flex-start;
+}
+.tone-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.tone-button {
+  padding: 8px 12px;
+  font-size: 13px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+}
+.tone-button.active {
+  border: 2px solid #0b5ed7;
+  background: #0b5ed7;
+}
+.sliders-column {
+  margin-top: 12px;
+  display: flex;
+  gap: 6px; /* tighter spacing between vertical bars */
+  height: 100%;
+  align-items: stretch;
+}
+.sliders-row { flex-direction: row; }
+.slider-box {
+  margin-bottom: 4px; /* reduce vertical spacing */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+.slider-inner {
+  width: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.slider-label {
+  font-size: 13px;
+  display: block;
+  margin-bottom: 6px;
+}
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  flex: 1 1 auto;
+}
+.slider-row.vertical { flex-direction: column; }
+.slider-input { width: 220px; }
+
+/* Fixed-size wrapper so rotated sliders don't consume layout width */
+.vslider-wrap {
+  width: 40px;   /* visual width of bar */
+  height: 100%; /* fill available height */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vertical-range {
+  /* Default: rotate the horizontal slider to vertical (Chrome/Firefox) */
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--bar-height, 220px);  /* after rotation => visual height */
+  height: 40px;  /* visual thickness */
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  background: transparent;
+  outline: none;
+}
+
+/* Use native vertical slider when supported (Safari/WebKit) */
+@supports (-webkit-appearance: slider-vertical) {
+  .vertical-range {
+    transform: none;
+    -webkit-appearance: slider-vertical;
+    appearance: slider-vertical;
+    width: 40px;   /* visual width */
+    height: var(--bar-height, 220px); /* visual height */
+  }
+}
+
+/* Horizontal row for bar + percentage */
+.vertical-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Chrome / Edge / Safari track & thumb */
+.vertical-range::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8px;
+  background: #e3e6ea;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.vertical-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #0b5ed7;
+  border: 0;
+  margin-top: -4px; /* center on track thickness */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+.vertical-range:focus::-webkit-slider-runnable-track {
+  background: #d7dbe0;
+}
+
+/* Firefox track & thumb */
+.vertical-range::-moz-range-track {
+  width: 100%;
+  height: 8px;
+  background: #e3e6ea;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 999px;
+}
+.vertical-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #0b5ed7;
+  border: none;
+}
+.vertical-range:focus::-moz-range-track {
+  background: #d7dbe0;
+}
+.slider-caption {
+  margin-top: 4px; /* nudge caption closer */
+  font-size: 12px;
+}
+
+/* Make percentage sit closer and centered under vertical bars */
+.vertical-row .slider-pct {
+  width: auto;
+  margin-top: 0;
+  text-align: left;
+  font-size: 12px;
+}
+.slider-pct {
+  width: 60px;
+  text-align: right;
+  font-size: 13px;
+}
+.tone-mix {
+  margin-top: 18px;
+  font-size: 13px;
+  color: #666;
+}
+.tone-mix-list {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+.tone-mix-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tone-mix-item {
+  font-size: 13px;
+}
+.recorded-section {
+  margin-top: 12px;
+}
+.controls-row {
+  margin-top: 16px;
+}
+.recording-btn {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.countdown {
+  display: inline-block;
+  max-width: 480px;
+  width: auto;
+  padding: 12px 28px;
+  margin: 14px auto;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000; /* black text per request */
+  background: #fff; /* white background per request */
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  text-align: center;
+  animation: pulse 1s infinite;
+}
+
+.turn-indicator {
+  display: inline-block;
+  max-width: 480px;
+  width: auto;
+  padding: 8px 20px;
+  margin: 8px auto;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000; /* black text per request */
+  background: #fff; /* white background per request */
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+/* Transcription box styling */
+.transcription-box {
+  max-width: 720px;
+  margin: 8px auto 12px auto; /* center and separate from elements */
+  padding: 10px 14px;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #ffffff, #fbfbfc);
+  box-shadow: 0 4px 14px rgba(16,24,40,0.04);
+  text-align: left;
+}
+.transcription-box > strong { display:block; margin-bottom:6px; font-size:13px; }
+.transcription-text {
+  font-size: 14px;
+  color: #111;
+  line-height: 1.4;
+  white-space: pre-wrap; /* preserve line breaks */
+  word-break: break-word;
+}
+
+
+
+
+
+/* Fix slider heights */
+.vslider-wrap {
+  width: 40px;
+  height: 200px;  /* explicit height */
+  min-height: 200px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  --bar-height: 200px;
+}
+
+/* Ensure panels have enough height */
+.panel {
+  flex: 1 1 0;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+}
+
+/* Make container full width */
+.rap-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Ensure top panels spread evenly */
+.top-panels {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+  margin-top: 12px;
+  width: 100%;
+}

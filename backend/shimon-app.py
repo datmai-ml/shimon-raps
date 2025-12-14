@@ -39,7 +39,7 @@ sampleRate = 22050
 inputDir = "recordings"
 outputDir = "synthesized"
 transcriptFile = "transcript.txt"
-tempo = 106
+tempo = 100
 beatInterval = 60 / tempo
 
 os.makedirs(inputDir, exist_ok=True)
