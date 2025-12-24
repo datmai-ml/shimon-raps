@@ -12,4 +12,6 @@ Running the full system requires both frontend and backend setup, as well as aud
 ## Features
 - Real-time lyric generation
 - Interactive responses based on user input
+- Output voice mixing
+- Output lyrics emotion mixing
 - Designed for educational and research purposes
